@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cat — портфолио</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500&display=swap">
+<style>
+:root{--bg:#0f1114;--fg:#e8e6e1;--mut:#8b8f96;--line:#ffffff1a;--o:#c8773f;--g1:#c8773f;--g2:#7b8fd1;
+--serif:"Instrument Serif",Georgia,serif;--sans:Inter,system-ui,Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--sans);overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.glow{position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(100px);opacity:.14;animation:drift 40s ease-in-out infinite alternate}
+.g1{background:var(--g1);left:-20vmax;top:-20vmax}
+.g2{background:var(--g2);right:-25vmax;bottom:-25vmax;animation-duration:55s;opacity:.1}
+@keyframes drift{to{transform:translate(12vmax,8vmax) scale(1.15)}}
+.scene{position:absolute;inset:0}
+.wall{position:absolute;inset:-1vh 0;display:flex;flex-direction:column;justify-content:space-between;font:400 clamp(3rem,13vh,9rem)/1 var(--serif);white-space:nowrap}
+.rw{display:flex;width:max-content;animation:slide 150s linear infinite}
+.rw span{margin-right:4vw;color:var(--fg);opacity:.055}
+.rw span.hl{color:var(--o);opacity:.34}
+@keyframes slide{to{transform:translateX(-50%)}}
+nav{position:fixed;z-index:5;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;justify-content:space-between;padding:22px 6vw;font-size:14px;mix-blend-mode:difference}
+nav a{color:#fff;text-decoration:none;margin-left:24px;opacity:.8}nav a:hover{opacity:1}nav .n{margin:0;opacity:1}
+main{position:relative;z-index:2;max-width:1000px;margin:auto;padding:0 6vw}
+section{min-height:100vh;padding:18vh 0 8vh;border-top:1px solid var(--line)}
+section:first-child{border:0;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:12vh}
+h1{font:400 clamp(3.4rem,11vw,8rem)/.95 var(--serif);margin:0 0 .3em;letter-spacing:-.02em}
+h2{font:400 clamp(2rem,5vw,3rem)/1.1 var(--serif);margin:0 0 1.2em}
+.lead{font-size:1.15rem;color:var(--mut);max-width:34em;margin:0}
+.meta{margin-top:2.4em;font-size:13px;color:var(--mut);display:flex;gap:2em;flex-wrap:wrap}
+.row{display:grid;grid-template-columns:48px 1fr 150px 60px;gap:16px;align-items:baseline;padding:22px 0;color:inherit;text-decoration:none;transition:padding .35s,color .35s}
+.row:hover{padding-left:14px;color:var(--o)}
+.row b{font:400 1.6rem var(--serif);color:var(--fg)}.row:hover b{color:inherit}
+.row span{font-size:14px;color:var(--mut)}
+.cols{display:grid;grid-template-columns:1.4fr 1fr;gap:6vw}
+ul{list-style:none;padding:0;margin:0}li{padding:9px 0;border-bottom:1px solid var(--line);color:var(--mut);font-size:15px}
+.side{font-size:14px;color:var(--mut);margin-top:2em}
+.mail{font:400 clamp(1.8rem,6vw,3.6rem) var(--serif);color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line)}
+.mail:hover{border-color:var(--o)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity 1s ease,transform 1s ease}.rv.in{opacity:1;transform:none}
+.it{border-top:1px solid var(--line)}.it:last-child{border-bottom:1px solid var(--line)}
+.row{cursor:pointer}
+.row span:last-child::after{content:"+";display:inline-block;margin-left:14px;color:var(--o);transition:transform .45s}
+.it.open .row span:last-child::after{transform:rotate(45deg)}
+.it.open .row{color:var(--o)}
+.pnl{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.2,.8,.2,1)}
+.it.open .pnl{grid-template-rows:1fr}
+.pin{overflow:hidden;min-height:0}
+.pc{display:grid;grid-template-columns:1fr 1.1fr;gap:28px;padding:6px 0 34px 64px;opacity:0;transform:translateY(-10px);transition:opacity .5s .1s,transform .5s .1s}
+.it.open .pc{opacity:1;transform:none}
+.ph{aspect-ratio:4/3;border:1px solid var(--line);border-radius:4px;background:linear-gradient(135deg,#ffffff10,#ffffff04) center/cover no-repeat;display:grid;place-items:center;color:var(--mut);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.pc p{margin:0;color:var(--mut);max-width:34em}
+.tg{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.2em}
+.tg li{border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:13px}
+footer{padding:40px 0;font-size:13px;color:var(--mut)}
+@media(max-width:700px){.row{grid-template-columns:34px 1fr 50px}.row span:nth-of-type(1){display:none}.cols{grid-template-columns:1fr}.pc{grid-template-columns:1fr;padding-left:0}nav a:not(.n){margin-left:14px}}
+@media(prefers-reduced-motion:reduce){.glow,.rw{animation:none}.rv{transition:none}}
+</style>
+</head>
+<body>
+<div class="bg">
+ <div class="glow g1"></div><div class="glow g2"></div>
+ <div class="scene" id="sA"><div class="wall"></div></div>
+ <div class="scene" id="sB" style="opacity:0"><div class="wall"></div></div>
+</div>
+
+<nav><a class="n" href="#top">Cat</a><div><a href="#work">Работы</a><a href="#about">Обо мне</a><a href="#contact">Контакты</a></div></nav>
+
+<main>
+<section id="top">
+ <h1 class="rv">Cat</h1>
+ <p class="lead rv">Делаю всё, что приходит в голову, — для себя. Увлекаюсь Roblox и развиваю собственный проект.</p>
+ <div class="meta rv"><span>Roblox</span><span>Eternal Force Studio</span></div>
+</section>
+
+<section id="work">
+ <h2 class="rv">Проекты</h2>
+ <div class="rv">
+  <a class="row" href="#" data-i="0"><b>01</b><b>Saber Conquers</b><span>Roblox · игра</span><span>В разработке</span></a>
+  </div>
+</section>
+
+<section id="about">
+ <h2 class="rv">Обо мне</h2>
+ <div class="cols rv">
+  <div>
+   <p class="lead">Пришёл в разработку по зову сердца. По жизни — спортсмен, и мечтаю увидеть игру про шорт-трек: со скоростью, виражами и борьбой за каждую десятую секунды.</p>
+   <p class="side">Вне работы — «Войны клонов» и Формула 1. Дисциплина клонов и скорость на трассе — хорошие ориентиры и для работы.</p>
+  </div>
+  <ul><li>Roblox Studio</li><li>Игровой дизайн и идеи</li><li>Работа в команде</li><li>Дисциплина и выдержка (спорт)</li></ul>
+ </div>
+</section>
+
+<section id="contact">
+ <h2 class="rv">Контакты</h2>
+ <p class="lead rv" style="margin-bottom:1.4em">Есть идея или хочешь вместе что-то сделать? Напиши.</p>
+ <a class="mail rv" href="mailto:you@example.com">you@example.com</a>
+ <div class="meta rv"><a style="color:inherit" href="#">Telegram</a><a style="color:inherit" href="#">Roblox</a></div>
+ <footer>© 2026 Cat</footer>
+</section>
+</main>
+
+<script>
+const BAT=['1','5','7','15','21','24','38','41','44','91','99','104','187','212','332','442','501'];
+const DRV=['HAMILTON','LECLERC','NORRIS','RUSSELL','ALONSO','SAINZ','GASLY','ALBON','HULKENBERG','BEARMAN','OCON','STROLL','VERSTAPPEN','PIASTRI'];
+let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+function build(el,list,hl,rows,n){
+ const rest=list.filter(x=>!hl.includes(x));
+ for(let r=0;r<rows;r++){
+  const a=[...rest].sort(()=>rnd()-.5).slice(0,n);
+  a.splice(2+(r*3)%4,0,hl[r%hl.length]);
+  if(r%2)a.splice(n-1,0,hl[(r+1)%hl.length]);
+  const row=document.createElement('div');row.className='rw';
+  row.style.animationDuration=(110+rnd()*80)+'s';
+  row.style.animationDelay='-'+(rnd()*100)+'s';
+  if(r%2)row.style.animationDirection='reverse';
+  const html=a.map(t=>'<span'+(hl.includes(t)?' class="hl"':'')+'>'+t+'</span>').join('');
+  row.innerHTML=html+html;el.appendChild(row)}}
+const A=document.getElementById('sA'),B=document.getElementById('sB');
+build(A.firstElementChild,BAT,['15','212','187'],7,9);
+build(B.firstElementChild,DRV,['VERSTAPPEN','PIASTRI'],7,6);
+
+const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),
+mix=(a,b,t)=>'rgb('+hex(a).map((v,i)=>Math.round(v+(hex(b)[i]-v)*t)).join(',')+')',
+sm=(a,b,x)=>{x=Math.min(1,Math.max(0,(x-a)/(b-a)));return x*x*(3-2*x)},
+rs=document.documentElement.style;
+function upd(){
+ const m=document.documentElement.scrollHeight-innerHeight,p=m>0?Math.min(1,scrollY/m):0,t=sm(.28,.52,p),c=sm(0,.9,p);
+ A.style.opacity=1-t;B.style.opacity=t;
+ rs.setProperty('--bg',mix('#0f1114','#0b1236',c));
+ rs.setProperty('--o',mix('#c8773f','#e6153f',c));
+ rs.setProperty('--g1',mix('#c8773f','#db0a40',c));
+ rs.setProperty('--g2',mix('#7b8fd1','#ffc906',c));
+ rs.setProperty('--mut',mix('#8b8f96','#98a2c8',c));
+ A.firstElementChild.style.transform=B.firstElementChild.style.transform='translateY('+(-scrollY*.04)+'px)'}
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+const PR=[
+ {t:'Saber Conquers',m:'',d:'Игра на Roblox, которую я развиваю вместе с командой Eternal Force Studio, где состою. Проект в активной разработке: мы шаг за шагом доводим идеи до игры, в которую приятно возвращаться.',tags:['Roblox','Командная работа','Eternal Force Studio'],img:''}];
+const rows=[...document.querySelectorAll('.row')];
+rows.forEach((r,i)=>{const o=PR[i],it=document.createElement('div');it.className='it';r.parentNode.insertBefore(it,r);it.appendChild(r);
+ const pn=document.createElement('div');pn.className='pnl';
+ pn.innerHTML='<div class="pin"><div class="pc"><div class="ph"></div><div><p></p><ul class="tg"></ul></div></div></div>';
+ const ph=pn.querySelector('.ph');if(o.img){ph.style.backgroundImage='url("'+o.img+'")'}else{ph.textContent='Фото проекта'}
+ pn.querySelector('p').textContent=o.d;
+ o.tags.forEach(t=>{const li=document.createElement('li');li.textContent=t;pn.querySelector('.tg').appendChild(li)});
+ it.appendChild(pn);r.setAttribute('role','button');r.setAttribute('aria-expanded','false');
+ r.addEventListener('click',e=>{e.preventDefault();const on=!it.classList.contains('open');
+  document.querySelectorAll('.it.open').forEach(x=>{x.classList.remove('open');x.querySelector('.row').setAttribute('aria-expanded','false')});
+  if(on){it.classList.add('open');r.setAttribute('aria-expanded','true')}})});
+</script>
+</body>
+</html>
